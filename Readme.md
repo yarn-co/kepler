@@ -11,9 +11,6 @@
   <script src="./WorldBuilder.js"></script>
   <script src="./WorldBuilderLoop.js"></script>
   <script src="./WorldBuilderMakerBot.js"></script>
-  
-  <!-- These will need to be their own repo at some point
-  As Triforce depends on the exact same logic -->
   <script src="./copies_of_core/BuildSubdividePoints.js"></script>
   <script src="./copies_of_core/SunflowerLogic.js"></script>
   <script src="./copies_of_core/Sunflower_caches.js"></script>
@@ -51,8 +48,10 @@
 
 // local json var val
  a.svgElement
+ and 
+ Kepler.data.svgElement
 
 // ajax request setter data
- Kepler.svgElement
+ Kepler.data.svgElement
 
 ```
