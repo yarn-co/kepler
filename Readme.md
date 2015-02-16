@@ -19,8 +19,8 @@
 
 
 ### run either as a string or via AJAX, however AJAX here is just as an example test
-### string expects ma_data.trixels[n]
-### AJAX expects ma_data.data.trixels[n]
+### JSON expects JSON_EXPORT.trixels[n]
+### AJAX expects AJAX_GET.data.trixels[n]
 
 ```  
 // local json string
