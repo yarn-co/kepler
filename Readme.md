@@ -1,4 +1,31 @@
+
+## To use
+
+
+## Include files until this is minified
+```
+ <!-- Kepler!!!!! -->
+  <script src="./Kepler.js?23894"></script>
+  <script src="./AjaxSimple.js"></script>
+  <script src="./Compile.js?38y4"></script>
+  <script src="./WorldBuilder.js"></script>
+  <script src="./WorldBuilderLoop.js"></script>
+  <script src="./WorldBuilderMakerBot.js"></script>
+  
+  <!-- These will need to be their own repo at some point
+  As Triforce depends on the exact same logic -->
+  <script src="./copies_of_core/BuildSubdividePoints.js"></script>
+  <script src="./copies_of_core/SunflowerLogic.js"></script>
+  <script src="./copies_of_core/Sunflower_caches.js"></script>
+
+```
+
+
+## run either as a string or via AJAX, however AJAX here is jsut as an example test
+
 ```  
+// local json string
+
  a = new Kepler({
 	width : 400,
 	JSON_Data : JSONY,
@@ -6,6 +33,9 @@
 	display : true,
 	dataType : 'JSON'
  })
+
+ // very basic AJAX request for example only maybe
+
  a = new Kepler({
 	width : 400,
 	JSON_Data : 'http://api.trixel.io/trixels/65',
@@ -15,9 +45,12 @@
 	dataType : 'AJAX'
  })
 
-// static
+// data output to get the returned svg
+
+// local json var val
  a.svgElement
-// ajax
+
+// ajax request setter data
  Kepler.svgElement
 
 ```
