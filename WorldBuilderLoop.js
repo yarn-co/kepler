@@ -1,6 +1,7 @@
 
-var SunflowerLogic = require('./SunflowerLogic');
+var SunflowerLogic = require('./copies_of_core/SunflowerLogic');
 
+// TODO: what is this below?
 /*======================= 
   
     [ { [{},{},{}] }, {} ]
@@ -8,19 +9,17 @@ var SunflowerLogic = require('./SunflowerLogic');
 =======================*/ 
 
 
-Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = function(level,cache) {
-  
-      var BIG_G = Kepler.WorldBuilder;
-      var templayers = [];
-      // _TrixelsDNA = trixelViewer._TrixelsDNA;
-      var WORLD = Kepler.WorldBuilder.world;
+var GridBuilderLoop = module.exports = function(World, level, cache) {
+        
+      // TODO: Why is this here?
+      // var templayers = [];
 
       // var b = Triforce.MetaEngine.SunflowerLogic.TriangulateQuadrentEdges(level,cache);
-      var b = SunflowerLogic.TriangulateQuadrentEdges(level,cache);
+      var b = SunflowerLogic.TriangulateQuadrentEdges(level, cache);
       // debugger
       
       // var c = Triforce.MetaEngine.SunflowerLogic.BuildTrixelsIndexes(level,b);
-      var c = SunflowerLogic.BuildTrixelsIndexes(level,b);
+      var c = SunflowerLogic.BuildTrixelsIndexes(level, b);
 // debugger
       // var sunIndex = trixelViewer._TrixelsDNA.SunflowerGridListInLayersIndex,
       // sunLayers = trixelViewer._TrixelsDNA.SunflowerGridListInLayers;
@@ -56,11 +55,11 @@ Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = fun
                   
                   var singleTrixel = {
           
-                    v0 : { x: WORLD.allStoredTrixelPoints[p0].x, y: WORLD.allStoredTrixelPoints[p0].y, z: 0 },
+                    v0 : { x: World.allStoredTrixelPoints[p0].x, y: World.allStoredTrixelPoints[p0].y, z: 0 },
           
-                    v1 : { x: WORLD.allStoredTrixelPoints[p1].x, y: WORLD.allStoredTrixelPoints[p1].y, z: 0 },
+                    v1 : { x: World.allStoredTrixelPoints[p1].x, y: World.allStoredTrixelPoints[p1].y, z: 0 },
           
-                    v2 : { x: WORLD.allStoredTrixelPoints[p2].x, y: WORLD.allStoredTrixelPoints[p2].y, z: 0 },
+                    v2 : { x: World.allStoredTrixelPoints[p2].x, y: World.allStoredTrixelPoints[p2].y, z: 0 },
           
                   };
               }
@@ -78,7 +77,7 @@ Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = fun
               // sunIndex++;
 
               // FK it, just add them to a world object for now
-              Kepler.WorldBuilder.world.all.push(singleTrixel);
+              World.all.push(singleTrixel);
           };
 
           // building inner layer
@@ -123,16 +122,16 @@ Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = fun
               // {vert,vert,vert}
               var singleTrixel = {
               
-                v0 : { x: WORLD.allStoredTrixelPoints[p0].x, y: WORLD.allStoredTrixelPoints[p0].y, z: 0 },
+                v0 : { x: World.allStoredTrixelPoints[p0].x, y: World.allStoredTrixelPoints[p0].y, z: 0 },
               
-                v1 : { x: WORLD.allStoredTrixelPoints[p1].x, y: WORLD.allStoredTrixelPoints[p1].y, z: 0 },
+                v1 : { x: World.allStoredTrixelPoints[p1].x, y: World.allStoredTrixelPoints[p1].y, z: 0 },
               
-                v2 : { x: WORLD.allStoredTrixelPoints[p2].x, y: WORLD.allStoredTrixelPoints[p2].y, z: 0 },
+                v2 : { x: World.allStoredTrixelPoints[p2].x, y: World.allStoredTrixelPoints[p2].y, z: 0 },
               
               };
 
               // FK it, just add them to a world object for now
-              Kepler.WorldBuilder.world.all.push(singleTrixel);
+              World.all.push(singleTrixel);
 
               // add to the layers group stack
               // temp_outter.push(sunIndex);
@@ -144,7 +143,7 @@ Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = fun
 
       // save the index as a layer set
       // this looks to not be used
-      templayers.push(temp_outter);
+      // templayers.push(temp_outter);
 
       // sunLayers.push(templayers);
 

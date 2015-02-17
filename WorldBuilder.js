@@ -28,8 +28,12 @@ BUG: to do with levels wonkynesssssss level has to be higher then 3 or it return
 in the all property
 */
 
+var BuildTrixelsInLevels = require('./WorldBuilderMakerBot');
+var BuildSubdividePoints = require('./copies_of_core/BuildSubdividePoints');
 
-Kepler.WorldBuilder = {};
+var internals = {};
+
+var WorldBuilder = module.exports = {};
 
 // Database                        
 // rename allStoredTrixelPoints to vertices
@@ -44,66 +48,32 @@ Kepler.WorldBuilder = {};
 // };
 
 
-Kepler.WorldBuilder.seek = Kepler.WorldBuilder.init = function (amountOfLayers, trixelUnit) {
+WorldBuilder.seek = WorldBuilder.init = function (amountOfLayers, trixelUnit) {
 
   // build and reset
-  Kepler.WorldBuilder.world = {
+  var World = {
     all:[],
     layers:[],
     allStoredTrixelPoints:[0],
     amountOfLayers:0,
     trixelUnit : 0,
     currentBaseLevel: 2
-
   };
-
-  var BIG_G = Kepler.WorldBuilder;
   
-  Kepler.WorldBuilder.world.amountOfLayers = amountOfLayers;
-  Kepler.WorldBuilder.world.trixelUnit = trixelUnit;
+  World.amountOfLayers = amountOfLayers;
+  World.trixelUnit = trixelUnit;
 
   // make sure order stays
-  BIG_G.BuildMultipleLayersOfHexCircles();
-  // special for the first 6 trixels
-  BIG_G.firstHexCircle();
-  // if (_TrixelsDNA.BuildTrixels === true) {
-  BIG_G.BuildTrixelsInLevels();
-  // };
-  // BIG_G.ParseDown();
-
-  return BIG_G.world;
-}
-
-// simplified Vector for this text output without needing ThreeJS
-// Kepler.WorldBuilder.Vector3 = function (x,y,z) {
-//   this.x = x || 0;
-//   this.y = y || 0;
-//   this.z = z || 0;
-//   return {x:this.x,y:this.y,z:this.z};
-// }
-
-/* 
-*     
-*    We need to only return the ammout of layers trixels that match our level count
-*    Depreciated, was used when layers request was 54
-*       
-*/
-Kepler.WorldBuilder.ParseDown = function  () {
-  var n = 6;
-  for (var i = 0; i < Kepler.WorldBuilder.world.amountOfLayers; i++) {
-    n += 12;
-  };
-  var temp = [];
-  for (var i = 0; i < n; i++) {
-    temp.push( Kepler.WorldBuilder.world.all[i] );
-  };
-  // Kepler.WorldBuilder.world.all.length
-  temp.slice(0);
-  Kepler.WorldBuilder.world.all.length = 0;
-  Kepler.WorldBuilder.world.all = temp;
-
+  internals.BuildMultipleLayersOfHexCircles(World);
   
+  // special for the first 6 trixels
+  internals.firstHexCircle(World);
+  
+  BuildTrixelsInLevels(World);
+
+  return World;
 }
+
 
 
 /* 
@@ -113,10 +83,8 @@ Kepler.WorldBuilder.ParseDown = function  () {
 *       
 */
 
-Kepler.WorldBuilder.BuildHexCircle = function(args){
-  
-  var BIG_G = Kepler.WorldBuilder;
-  var WORLD = Kepler.WorldBuilder.world;
+internals.BuildHexCircle = function(World, args){
+    
   // a stayover dealing with BuildSubdividePoints
   var trixelViewer = {
     _TrixelsDNA : {
@@ -124,9 +92,9 @@ Kepler.WorldBuilder.BuildHexCircle = function(args){
     }
   }
 
-  this.radius = args.radius || 14;
-  this.segmentCount = args.segmentCount || 6;
-  this.color = args.color || 0x520061;
+  var radius = args.radius || 14;
+  var segmentCount = args.segmentCount || 6;
+  var color = args.color || 0x520061;
   var currentedgeindex = args.currentedgeindex;
 
   // var geometry = new THREE.Geometry(),
@@ -135,23 +103,23 @@ Kepler.WorldBuilder.BuildHexCircle = function(args){
 
   // goes counter clockwise from -theta since the grid finder is also
   // based on this direction
-  for (var i = 0; i <= this.segmentCount; i++) {
-        var theta = (i / this.segmentCount) * Math.PI * 2;
+  for (var i = 0; i <= segmentCount; i++) {
+        var theta = (i / segmentCount) * Math.PI * 2;
         geometry.vertices.push(
             // new BIG_G.Vector3(
             //     Math.sin(-theta) * this.radius,
             //     Math.cos(-theta) * this.radius,
             //     0));
             {
-              x: Math.sin(-theta) * this.radius,
-              y: Math.cos(-theta) * this.radius,
+              x: Math.sin(-theta) * radius,
+              y: Math.cos(-theta) * radius,
               z: 0
             }
         );
   }
 
-  var newGeometry = new Kepler.BuildSubdividePoints.init({
-      currentlevel : WORLD.currentBaseLevel,
+  var newGeometry = new BuildSubdividePoints.init({
+      currentlevel : World.currentBaseLevel,
       currentedgeindex : 0,
       currentVerts : geometry.vertices,
       parentObject : null,
@@ -176,10 +144,8 @@ Kepler.WorldBuilder.BuildHexCircle = function(args){
 *    Rings are considered Levels 
 *       
 */
-Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
-  var BIG_G = Kepler.WorldBuilder;
-  var WORLD = Kepler.WorldBuilder.world;
-
+internals.BuildMultipleLayersOfHexCircles = function(World){
+  
   var vertsCurrentIndex = 0;
   var moreee = 0;
 
@@ -203,7 +169,10 @@ Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
   */
   console.warn("arbitrary limit 54");
   // var layersCount = WORLD.amountOfLayers + 1 || 54;
-  var layersCount = WORLD.amountOfLayers + 2 || 54;
+  
+  // TODO: is this fine below?
+  var layersCount = World.amountOfLayers + 2 || 54;
+  
   // var layersCount = 54;
   // var layersCount = 14;
 
@@ -212,8 +181,8 @@ Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
     // debugger
   // for (var i = 1; i < trixelViewer._TrixelsDNA.amountOfLayers; i++) {
     // console.log("Popcorn");
-      var layers = new BIG_G.BuildHexCircle({
-        radius : WORLD.trixelUnit*(i)
+      var layers = internals.BuildHexCircle(World, {
+        radius : World.trixelUnit*(i)
       });
       console.log("Popcorn");
       // console.log("layers.geometry.vertices.length",layers.geometry.vertices.length -1);
@@ -226,7 +195,7 @@ Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
       // debugger
       
       // needed for each hexCircle ring thats drawn in the subdivide routine
-      WORLD.currentBaseLevel++;
+      World.currentBaseLevel++;
 
 
       // store the original vertices
@@ -237,7 +206,8 @@ Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
       // storing the vertices from the layer now
       for (var o = 0; o < verts.length; o++) {
 
-          WORLD.allStoredTrixelPoints[vertsCurrentIndex] = verts[o];
+          // TODO: this indexing seems wrong.  doesn't vertsCurrentIndex reset to 0 each time?  maybe I'm misunderstanding!
+          World.allStoredTrixelPoints[vertsCurrentIndex] = verts[o];
 
           vertsCurrentIndex++;
       };
@@ -254,19 +224,13 @@ Kepler.WorldBuilder.BuildMultipleLayersOfHexCircles = function(){
 *       
 */
 // special for the first 6 trixels
-Kepler.WorldBuilder.firstHexCircle = function() {
-  var BIG_G = Kepler.WorldBuilder;
-  var WORLD = Kepler.WorldBuilder.world;
-
-  // var mixcolor = Triforce.Tools.makeRandomHexColor();
-  var templayers = [];
-  // var _TrixelsDNA = trixelViewer._TrixelsDNA;
+internals.firstHexCircle = function(World) {
 
   var _layer = [];
   for (var i = 0; i < 6; i++) {
     
-      var thismap0 = WORLD.allStoredTrixelPoints[i];
-      var thismap1 = WORLD.allStoredTrixelPoints[i+1];
+      var thismap0 = World.allStoredTrixelPoints[i];
+      var thismap1 = World.allStoredTrixelPoints[i+1];
 
       var singleTrixel = {
         v0 : { x: thismap0.x, y: thismap0.y, z: 0 },
@@ -277,15 +241,14 @@ Kepler.WorldBuilder.firstHexCircle = function() {
    
 
       // FK it, just add them to a world object for now
-      Kepler.WorldBuilder.world.all.push(singleTrixel);
+      World.all.push(singleTrixel);
 
       _layer.push(singleTrixel);
 
   };
 
   // push first layer to list
-  Kepler.WorldBuilder.world.layers.push(_layer);
-  
+  World.layers.push(_layer);
   
 }
 

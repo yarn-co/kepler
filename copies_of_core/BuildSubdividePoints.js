@@ -55,7 +55,7 @@ NOTE: was called Kepler.BuildSubdividePoints
 // Kepler.BuildSubdividePoints = {};
 // Triforce.Build_Subdivide_Points_On_Trixel_Edge = {};
 
-Kepler.BuildSubdividePoints = { REVISION: '6' };
+var BuildSubdividePoints = module.exports = { REVISION: '6' };
 
 
 /* 
@@ -63,13 +63,14 @@ Kepler.BuildSubdividePoints = { REVISION: '6' };
 *      
 *       
 */
-Kepler.BuildSubdividePoints.init = function(args){
+BuildSubdividePoints.init = function(args) {
+    
     var currentlevel = args.currentlevel;
     var currentedgeindex = args.currentedgeindex;
     var currentVerts = args.currentVerts;
     var parentObject = args.parentObject;
     
-    var start = new Kepler.BuildSubdividePoints.core({
+    var start = new BuildSubdividePoints.core({
       level : currentlevel,
       // level : 2,
       edgeindex : currentedgeindex,
@@ -87,6 +88,7 @@ Kepler.BuildSubdividePoints.init = function(args){
     *       
     */
     // debugger
+    // TODO: whatsup with this?  _TrixelsDNA?!
     if (args.Global._TrixelsDNA.logComputedPoints === true) {
       // console.log("=========  starting all computed points ");
       for (var i = 0; i < f.length-7; i++) {
@@ -102,7 +104,7 @@ Kepler.BuildSubdividePoints.init = function(args){
 };//PerformSubdivide()
 
 
-Kepler.BuildSubdividePoints.core = function(args){
+BuildSubdividePoints.core = function(args) {
 	// console.log("====== core box ======");
 	this.level = args.level;
 	this.edgeindex = args.edgeindex;
@@ -115,8 +117,10 @@ Kepler.BuildSubdividePoints.core = function(args){
 
 	return this;
 }
-Kepler.BuildSubdividePoints.core.prototype = {
-	constructor: Kepler.BuildSubdividePoints.core,
+
+BuildSubdividePoints.core.prototype = {
+    
+	constructor: BuildSubdividePoints.core,
 
 	startNewPoints : function(limitedges){
 		var limit = limitedges || 6;

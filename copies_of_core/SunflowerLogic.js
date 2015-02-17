@@ -202,16 +202,9 @@ _.range(6*10+4, 6*15+5) // 30/31
     for (var n = 0; n < times; n++) {
       temp = [];
       count = 0;
+      
         // triangular number, see wikipedia
         g = (n+1)*n/2;
-        /*
-        g = (n+1)*n/2;n++;g;
-        */
-    /*console.log("g", g);
-    console.log("pg", pg);
-    console.log("(6*pg)+index", 6, pg, " + ", previousIndex, "    ", "6*g+(index+1)", 6, g, "+", index, "+1" );
-    console.log("---", (6*pg)+previousIndex, "    ", (6*g)+index );
-    */
 
         var count = _.range( (6*pg)+previousIndex, (6*g)+index );
         // temp.push(count);

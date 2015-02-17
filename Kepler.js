@@ -1,4 +1,5 @@
-var Compile = require('./Compile');
+var Compile 	 = require('./Compile');
+var WorldBuilder = require('./WorldBuilder');
 
 /* 
 *     
@@ -129,7 +130,7 @@ var Kepler = module.exports = function (args) {
 			this.levels -= levelsFix;
 		};
 
-		var planet = Kepler.WorldBuilder.init( this.levels ,14);
+		var planet = WorldBuilder.init(this.levels, 14);
 		// Compile = function (baseWidth, layersIn, SCALE_TYPE, TRIXELS_GEOMETRY, JSON_SOURCE, BASE_UNIT, DIV_WRAPPER) {
 		// return Compile(this.width, this.levels, this.autoScale, planet, this.JSON_Data, 14, this.wrapper);
 
@@ -157,7 +158,7 @@ var Kepler = module.exports = function (args) {
 
 Kepler.buildWithControl = function (level) {
 	// level = 12
-	var planet = Kepler.WorldBuilder.init( level ,14);
+	var planet = WorldBuilder.init( level ,14);
 	Compile(300, level ,true, planet, JSONY);
 }
 
