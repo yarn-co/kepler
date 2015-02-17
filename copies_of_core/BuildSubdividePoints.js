@@ -55,6 +55,8 @@ NOTE: was called Kepler.BuildSubdividePoints
 // Kepler.BuildSubdividePoints = {};
 // Triforce.Build_Subdivide_Points_On_Trixel_Edge = {};
 
+var _ = require('lodash');
+
 var BuildSubdividePoints = module.exports = { REVISION: '6' };
 
 

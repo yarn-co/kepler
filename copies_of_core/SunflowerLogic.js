@@ -79,6 +79,8 @@ var trixelGrid = new BuildTrixelsIndexes(level,triangulate);
     *      
     *       
     */
+    
+var _ = require('lodash');
 
 
 // sunflower logic
