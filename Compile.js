@@ -43,9 +43,9 @@ var Compile = module.exports = function (args) {
       //   JSON_SOURCE = JSON.parse(JSON_SOURCE);
       // }
 
-      var header = '<?xml version="1.0" encoding="utf-8"?>\n' +
-                   '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixel.io. http://trixel.io -->\n' +
-                   '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n\n'
+      var header = '<?xml version="1.0" encoding="utf-8"?>' +
+                   '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixel.io. http://trixel.io -->' +
+                   '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'
       
 
 
@@ -145,7 +145,13 @@ var Compile = module.exports = function (args) {
             
 
             var svgElem = document.createElement("svg");
+
             svgElem.setAttribute("viewBox", -boxWidth/2 + " " + -boxHeight/2 + " " + boxWidth + " " + boxHeight);
+
+            svgElem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+            svgElem.setAttribute("style", 'background-color: rgba(0, 0, 0, 0); display:"block"; ');
+
 
             // swap between fluid or not
             if (_args.scaleType) {
@@ -156,7 +162,7 @@ var Compile = module.exports = function (args) {
               svgElem.setAttribute("height", boxHeight);
             }
 
-            svgElem.style.display = "block";
+            // svgElem.style.display = "block";
             var planetname = 'Kepler-' + Math.floor(Math.random()*782) + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
             svgElem.id = planetname; // Ooo! Found another planet!
 
@@ -205,7 +211,7 @@ var Compile = module.exports = function (args) {
 
                   // export file as string
                   entireFileOutPut =  header + svgElem.outerHTML;
-                  
+
             });
 
             return {
@@ -223,9 +229,7 @@ var Compile = module.exports = function (args) {
           var document = new Document();
           
           // not sure header matters here....
-          var header = '<?xml version="1.0" encoding="utf-8"?>\n' +
-                       '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixel.io. http://trixel.io -->\n' +
-                       '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n\n'
+          // var header = '<?xml version="1.0" encoding="utf-8"?><!-- Generator: Kepler-Triforce 0.0.0, powered by ZTrixel.io. http://trixel.io --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
           
 
           if (document.querySelector('#svgbox') !== null) {
