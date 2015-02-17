@@ -43,6 +43,12 @@ var Compile = module.exports = function (args) {
       //   JSON_SOURCE = JSON.parse(JSON_SOURCE);
       // }
 
+      var header = '<?xml version="1.0" encoding="utf-8"?>\n' +
+                   '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixel.io. http://trixel.io -->\n' +
+                   '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n\n'
+      
+
+
       return init();
 
       function init () {
@@ -181,8 +187,12 @@ var Compile = module.exports = function (args) {
                               // obj.material.opacity = _color_[key].opacity;
                               // console.log(obj.color);
 
-                              path.style.fill = _args.JSONSource.trixels[key].color;
-                              path.style.fillOpacity = _args.JSONSource.trixels[key].opacity;
+                              // path.style.fill = _args.JSONSource.trixels[key].color;
+                              // path.style.fillOpacity = _args.JSONSource.trixels[key].opacity;
+
+                              // use string setter instead of regex
+                              path.setAttribute('style',  'fill-opacity: '+_args.JSONSource.trixels[key].opacity+'; fill: '+_args.JSONSource.trixels[key].color+';' )
+
                           }
                    
 
@@ -192,10 +202,15 @@ var Compile = module.exports = function (args) {
                       path.style.fillOpacity = 1;
                   }
                   svgElem.appendChild (path);
+
+                  // export file as string
+                  entireFileOutPut =  header + svgElem.outerHTML;
+                  
             });
 
             return {
               svgElement : svgElem,
+              entireFileOutPut : entireFileOutPut,
               width : boxWidth,
               height : boxHeight
             };
