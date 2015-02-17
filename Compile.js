@@ -1,12 +1,5 @@
-
-// makey()
-
-// makey(200,3)
-// makey(200,3,true)
-
-// makey({
-
-// })
+// Shim for html document
+var document = new require('html-document/Document').Document();
 
 /*
 compile(300,Triforce.V.layers,false,Kepler.WorldBuilder.world, JSONY);
@@ -18,7 +11,7 @@ Kepler.Compile(300, level ,true, planet, JSONY);
 */
 
 // Kepler.Compile = function (baseWidth,layersIn,SCALE_TYPE, TRIXELS_GEOMETRY, JSON_SOURCE, BASE_UNIT, DIV_WRAPPER) {
-Kepler.Compile = function (args) {
+var Compile = module.exports = function (args) {
 
       var _args = {
         baseWidth : args.baseWidth,
@@ -142,16 +135,16 @@ Kepler.Compile = function (args) {
 
             
 
-            var svgElem = document.createElementNS (xmlns, "svg");
-            svgElem.setAttributeNS (null, "viewBox", -boxWidth/2 + " " + -boxHeight/2 + " " + boxWidth + " " + boxHeight);
+            var svgElem = document.createElement("svg");
+            svgElem.setAttribute("viewBox", -boxWidth/2 + " " + -boxHeight/2 + " " + boxWidth + " " + boxHeight);
 
             // swap between fluid or not
             if (_args.scaleType) {
-              svgElem.setAttributeNS (null, "width", "100%");
-              svgElem.setAttributeNS (null, "height", "100%");
+              svgElem.setAttribute("width", "100%");
+              svgElem.setAttribute("height", "100%");
             }else{
-              svgElem.setAttributeNS (null, "width", boxWidth);
-              svgElem.setAttributeNS (null, "height", boxHeight);
+              svgElem.setAttribute("width", boxWidth);
+              svgElem.setAttribute("height", boxHeight);
             }
 
             svgElem.style.display = "block";
@@ -163,13 +156,13 @@ Kepler.Compile = function (args) {
             var unitScale = calcUnitScale(boxWidth, layersCount );
 
             _args.trixelsGeometry.all.forEach(function (obj,key) {
-                  var path = document.createElementNS (xmlns, "path");
+                  var path = document.createElement("path");
                   // debugger
                   // path.setAttributeNS (null, 'd', 'M ' + obj.v0.x + ' '+ obj.v0.y +'  L ' + obj.v1.x + ' '+ obj.v1.y +' L ' + obj.v2.x + ' '+ obj.v2.y +'z');
                   // path.setAttributeNS (null, 'd', 'M ' + obj.v0.x * unitScale + ' '+ obj.v0.y * unitScale +'  L ' + obj.v1.x * unitScale + ' '+ obj.v1.y * unitScale +' L ' + obj.v2.x * unitScale + ' '+ obj.v2.y * unitScale +'z');
 
                   // Theres an issue with Y being flipped, maybe to do with viewBox so * -1 seems to work fancy like!
-                  path.setAttributeNS (null, 'd', 'M ' + obj.v0.x * unitScale + ' '+ (obj.v0.y * unitScale)*-1 +'  L ' + obj.v1.x * unitScale + ' '+ (obj.v1.y * unitScale)*-1 +' L ' + obj.v2.x * unitScale + ' '+ (obj.v2.y * unitScale)*-1 +'z');
+                  path.setAttribute('d', 'M ' + obj.v0.x * unitScale + ' '+ (obj.v0.y * unitScale)*-1 +'  L ' + obj.v1.x * unitScale + ' '+ (obj.v1.y * unitScale)*-1 +' L ' + obj.v2.x * unitScale + ' '+ (obj.v2.y * unitScale)*-1 +'z');
                   
 
                   // var calcUnit = (600/ Triforce.trixelUnit )*2;
@@ -210,7 +203,7 @@ Kepler.Compile = function (args) {
           
           // not sure header matters here....
           var header = '<?xml version="1.0" encoding="utf-8"?>\n' +
-                       '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixels.io. http://trixel.io -->\n' +
+                       '<!-- Generator: Kepler-Triforce 0.0.0, powered by Trixel.io. http://trixel.io -->\n' +
                        '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n\n'
           
 

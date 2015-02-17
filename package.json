@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yarn-co/kepler/issues"
   },
-  "homepage": "https://github.com/yarn-co/kepler"
+  "homepage": "https://github.com/yarn-co/kepler",
+  "dependencies": {
+    "html-document": "~0.4.0"
+  }
 }

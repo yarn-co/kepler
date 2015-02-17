@@ -1,3 +1,5 @@
+var Compile = require('./Compile');
+
 /* 
 *     
 *  ========================================
@@ -46,7 +48,7 @@ var Kepler = (function(me) {
 
 =======================*/ 
 
-Kepler = function (args) {
+var Kepler = module.exports = function (args) {
 	// this.adjusterUnit = args.adjusterUnit || 0.01;
 
 	if (args.dataType.toLowerCase() === "json") {
@@ -57,7 +59,16 @@ Kepler = function (args) {
 		return data;
 	}
 	else if (args.dataType.toLowerCase() === "ajax"){
-
+		
+		/*
+		*  TODO: some pretty big inconsistencies, as to whether Kepler runs sync or asynchronously
+		*  in this async case, kepler can't simply return an svg– it would instead need a callback.
+		*
+		*  Unless kepler needs to go async for any of its operations, I think we can assume it runs
+		*  synchronously accepting parsed JSON, and that this ajax option will disappear.
+		*  
+		*/
+		
 		// Kepler.getJSON( args.JSON_Data , function(data) {
 		// 	window.ajaxData = data;
 		// }, function(status) {
@@ -84,6 +95,7 @@ Kepler = function (args) {
 	}
 
 	function work () {
+	  
 		this.autoScale = args.autoScale || false;
 
 		this.width = args.width || 300;
@@ -118,19 +130,18 @@ Kepler = function (args) {
 		};
 
 		var planet = Kepler.WorldBuilder.init( this.levels ,14);
-		// Kepler.Compile = function (baseWidth, layersIn, SCALE_TYPE, TRIXELS_GEOMETRY, JSON_SOURCE, BASE_UNIT, DIV_WRAPPER) {
-		// return Kepler.Compile(this.width, this.levels, this.autoScale, planet, this.JSON_Data, 14, this.wrapper);
+		// Compile = function (baseWidth, layersIn, SCALE_TYPE, TRIXELS_GEOMETRY, JSON_SOURCE, BASE_UNIT, DIV_WRAPPER) {
+		// return Compile(this.width, this.levels, this.autoScale, planet, this.JSON_Data, 14, this.wrapper);
 
-		return Kepler.Compile({
-	        baseWidth : this.width,
-	        layersIn : this.levels,
-	        scaleType : this.autoScale,
-	        trixelsGeometry : planet,
-	        JSONSource : DATA_Parsed,
-	        // baseUnit : args.baseUnit,
-	        divWrapper : this.wrapper
-	    });
-
+		return Compile({
+		  baseWidth : this.width,
+		  layersIn : this.levels,
+		  scaleType : this.autoScale,
+		  trixelsGeometry : planet,
+		  JSONSource : DATA_Parsed,
+		  // baseUnit : args.baseUnit,
+		  divWrapper : this.wrapper
+		});
 	    
 	}
 }
@@ -147,7 +158,7 @@ Kepler = function (args) {
 Kepler.buildWithControl = function (level) {
 	// level = 12
 	var planet = Kepler.WorldBuilder.init( level ,14);
-	Kepler.Compile(300, level ,true, planet, JSONY);
+	Compile(300, level ,true, planet, JSONY);
 }
 
 
