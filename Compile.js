@@ -1,6 +1,6 @@
 // Shim for html document
 // TODO: make sure this wont memory leak by sharing the same document.
-var document = new require('html-document/Document').Document();
+var Document = require('html-document/Document').Document;
 
 /*
 compile(300,Triforce.V.layers,false,Kepler.WorldBuilder.world, JSONY);
@@ -121,6 +121,8 @@ var Compile = module.exports = function (args) {
       
       function createSVG (widthHeight) {
             
+            var document = new Document();
+            
             var xmlns = "http://www.w3.org/2000/svg";
 
             // var boxHeight = 692.820323027551;
@@ -201,6 +203,9 @@ var Compile = module.exports = function (args) {
       }
 
       function createPlaceHolderDIV (svgElem, width, height, scale) {
+          
+          // I'm sure this wont help here... probs unnecessary.
+          var document = new Document();
           
           // not sure header matters here....
           var header = '<?xml version="1.0" encoding="utf-8"?>\n' +
