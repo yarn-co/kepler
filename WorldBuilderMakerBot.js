@@ -1,4 +1,6 @@
 
+var SunflowerLogic = require('./SunflowerLogic');
+
 /* 
 *     
 *    Build trixels in each level from the sunflower logic operator
@@ -16,7 +18,7 @@ Kepler.WorldBuilder.MakerBot = Kepler.WorldBuilder.BuildTrixelsInLevels = functi
   
   // var a = new Triforce.MetaEngine.SunflowerLogic.MakeLevelPointCountFromTriangleNumbers(54);
   // var cache = MakeLevelPoints_cache;
-  var cache = new Kepler.SunflowerLogic.MakeLevelPointCountFromTriangleNumbers( WORLD.amountOfLayers + 2);
+  var cache = new SunflowerLogic.MakeLevelPointCountFromTriangleNumbers( WORLD.amountOfLayers + 2);
   // var b = TriangulateQuadrentEdges(level,a);
   // var c = BuildTrixelsIndexes(level,b)
 

@@ -1,3 +1,6 @@
+
+var SunflowerLogic = require('./SunflowerLogic');
+
 /*======================= 
   
     [ { [{},{},{}] }, {} ]
@@ -13,11 +16,11 @@ Kepler.WorldBuilder.makemagictrixels = Kepler.WorldBuilder.GridBuilderLoop = fun
       var WORLD = Kepler.WorldBuilder.world;
 
       // var b = Triforce.MetaEngine.SunflowerLogic.TriangulateQuadrentEdges(level,cache);
-      var b = Kepler.SunflowerLogic.TriangulateQuadrentEdges(level,cache);
+      var b = SunflowerLogic.TriangulateQuadrentEdges(level,cache);
       // debugger
       
       // var c = Triforce.MetaEngine.SunflowerLogic.BuildTrixelsIndexes(level,b);
-      var c = Kepler.SunflowerLogic.BuildTrixelsIndexes(level,b);
+      var c = SunflowerLogic.BuildTrixelsIndexes(level,b);
 // debugger
       // var sunIndex = trixelViewer._TrixelsDNA.SunflowerGridListInLayersIndex,
       // sunLayers = trixelViewer._TrixelsDNA.SunflowerGridListInLayers;

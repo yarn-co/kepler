@@ -83,7 +83,7 @@ var trixelGrid = new BuildTrixelsIndexes(level,triangulate);
 
 // sunflower logic
 // Triforce.MetaEngine.SunflowerLogic = (function(me){
-Kepler.SunflowerLogic = (function(me){
+var SunflowerLogic = module.exports = (function() {
 
 
     var segmentCountList = [0, 6, 12, 18, 24, 30, 36, 42, 48, 54];
@@ -523,7 +523,7 @@ function TriangulateQuadrentEdges(level,levelsList){
     
     
 
-}(Kepler || {}));
+}());
 
 
 
