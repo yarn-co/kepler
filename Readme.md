@@ -17,41 +17,11 @@
 
 ```
 
-
-### run either as a string or via AJAX, however AJAX here is just as an example test
-### JSON expects JSON_EXPORT.trixels[n]
-### AJAX expects AJAX_GET.data.trixels[n]
-
-```  
-// local json string
-
- a = new Kepler({
-	width : 400,
-	JSON_Data : JSONY,
-	autoScale : true,
-	display : true,
-	dataType : 'JSON'
- })
-
- // very basic AJAX request for example only maybe
-
- a = new Kepler({
-	width : 400,
-	JSON_Data : 'http://api.trixel.io/trixels/65',
-	//JSON_Data : 'http://api.trixel.io/trixels/27',
-	autoScale : true,
-	display : true,
-	dataType : 'AJAX'
- })
-
-// data output to get the returned svg
-
-// local json var val
- a.svgElement
- and 
- Kepler.data.svgElement
-
-// ajax request setter data
- Kepler.data.svgElement
+```
+node
+Kepler = require('./Kepler.js')
+JSONY = require('./temp_files/tempjson.js')
+SpaceSVG = Kepler({ JSON_Data : JSONY, autoScale : false, display : false, dataType : 'JSON'})
+SpaceSVG.entireFileOutPut
 
 ```
