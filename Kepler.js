@@ -52,49 +52,13 @@ var Kepler = (function(me) {
 var Kepler = module.exports = function (args) {
 	// this.adjusterUnit = args.adjusterUnit || 0.01;
 
-	if (args.dataType.toLowerCase() === "json") {
-		this.JSON_Data = args.JSON_Data;
-		// var that = this;
-		var data = Kepler.data = work.call(this);
-		// return work.call(this);
-		return data;
-	}
-	else if (args.dataType.toLowerCase() === "ajax"){
-		
-		/*
-		*  TODO: some pretty big inconsistencies, as to whether Kepler runs sync or asynchronously
-		*  in this async case, kepler can't simply return an svg– it would instead need a callback.
-		*
-		*  Unless kepler needs to go async for any of its operations, I think we can assume it runs
-		*  synchronously accepting parsed JSON, and that this ajax option will disappear.
-		*  
-		*/
-		
-		// Kepler.getJSON( args.JSON_Data , function(data) {
-		// 	window.ajaxData = data;
-		// }, function(status) {
-		//   alert('Something went wrong.');
-		// });
-
-		Kepler.getJSON( args.JSON_Data ).then(function(data) {
-			console.log("like!");
-			this.JSON_Data = data;
-			var a = work.call(this);
-			return a;
-
-		}, function(status) {
-
-		  console.log("Arrrrrg space bunies have ruined the mission");
-
-		})
-		// trying to find the proper return timing for a = new Kepler
-		.then(function (datas) {
-			// debugger
-			return Kepler.data = datas;
-		})
-
-	}
-
+	
+	args.dataType = args.dataType || "json";
+	  
+	this.JSON_Data = args.JSON_Data;
+	
+	return work.call(this);
+	
 	function work () {
 	  
 		this.autoScale = args.autoScale || false;
@@ -114,11 +78,13 @@ var Kepler = module.exports = function (args) {
 		  return;
 		}
 
-		if (args.dataType.toLowerCase() === "json") {
+		if (args.dataType.toLowerCase() === "string") {
+		  
 			var DATA_Parsed = JSON.parse(this.JSON_Data);
 		}
-		else if (args.dataType.toLowerCase() === "ajax") {
-			var DATA_Parsed = this.JSON_Data.data;
+		else if (args.dataType.toLowerCase() === "json") {
+		  
+			var DATA_Parsed = this.JSON_Data;
 		}
 
 		var levelsFix = 0;

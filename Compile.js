@@ -150,21 +150,17 @@ var Compile = module.exports = function (args) {
 
             svgElem.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
-            svgElem.setAttribute("style", 'background-color: rgba(0, 0, 0, 0); display:"block"; ');
+            svgElem.setAttribute("style", 'background-color: rgba(0, 0, 0, 0);');
 
 
             // swap between fluid or not
             if (_args.scaleType) {
               svgElem.setAttribute("width", "100%");
               svgElem.setAttribute("height", "100%");
-            }else{
+            } else {
               svgElem.setAttribute("width", boxWidth);
               svgElem.setAttribute("height", boxHeight);
             }
-
-            // svgElem.style.display = "block";
-            var planetname = 'Kepler-' + Math.floor(Math.random()*782) + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 1);
-            svgElem.id = planetname; // Ooo! Found another planet!
 
             // original height / calculated height of all trixels in a row top to bottom
             // var unitScale = unit || boxHeight / ( Triforce.trixelUnit * ( (Triforce.DNA.amountOfLayers - 1) * 2) );
@@ -209,14 +205,14 @@ var Compile = module.exports = function (args) {
                   }
                   svgElem.appendChild (path);
 
-                  // export file as string
-                  entireFileOutPut =  header + svgElem.outerHTML;
-
             });
-
+            
+            // export file as string
+            var file =  header + svgElem.outerHTML;
+            
             return {
               svgElement : svgElem,
-              entireFileOutPut : entireFileOutPut,
+              file : file,
               width : boxWidth,
               height : boxHeight
             };
