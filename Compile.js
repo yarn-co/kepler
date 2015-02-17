@@ -1,4 +1,5 @@
 // Shim for html document
+// TODO: make sure this wont memory leak by sharing the same document.
 var document = new require('html-document/Document').Document();
 
 /*
