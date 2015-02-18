@@ -1,27 +1,19 @@
+# Kepler
+Your premier planet-finder
 
-## To use
+## Usage
+```javascript
+var Kepler = require('kepler');
 
+var options = {
+    width: 400,  // Defaults to 300
+    baseUnit: 20 // Defaults to 14
+}
 
-## Include files until this is minified
-```
- <!-- Kepler!!!!! -->
-  <script src="./Kepler.js?23894"></script>
-  <script src="./AjaxSimple.js"></script>
-  <script src="./Compile.js?38y4"></script>
-  <script src="./WorldBuilder.js"></script>
-  <script src="./WorldBuilderLoop.js"></script>
-  <script src="./WorldBuilderMakerBot.js"></script>
-  <script src="./copies_of_core/BuildSubdividePoints.js"></script>
-  <script src="./copies_of_core/SunflowerLogic.js"></script>
-  <script src="./copies_of_core/Sunflower_caches.js"></script>
+var SVG = Kepler({/* trixel data from api */}, options);
 
-```
-
-```
-node
-Kepler = require('./Kepler.js')
-JSONY = require('./temp_files/tempjson.js')
-SpaceSVG = Kepler({ JSON_Data : JSONY, autoScale : false, display : false, dataType : 'JSON'})
-SpaceSVG.entireFileOutPut
-
+/*
+ * SVG.file holds the SVG file as a string
+ * SVG.element holds a structured XML representation of the SVG
+ */
 ```
