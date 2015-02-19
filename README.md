@@ -6,8 +6,9 @@ Your premier planet-finder
 var Kepler = require('kepler');
 
 var options = {
-    width: 400,  // Defaults to 300
-    baseUnit: 20 // Defaults to 14
+    width: 400,         // Defaults to 300
+    baseUnit: 20,       // Defaults to 14
+    mergePaths: true    // Defaults to false, merges paths by color
 }
 
 var SVG = Kepler({/* trixel data from api */}, options);
