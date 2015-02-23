@@ -9,6 +9,7 @@ var options = {
     width: 400,         // Defaults to 300
     baseUnit: 20,       // Defaults to 14
     mergePaths: true    // Defaults to false, merges paths by color
+    fillGaps: true      // Defaults to false, adds small glow to each trixel to fill subpixel gaps
 }
 
 var SVG = Kepler({/* trixel data from api */}, options);
