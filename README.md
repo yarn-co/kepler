@@ -20,7 +20,7 @@ var options = {
 
 var SVG = Kepler({/* trixel data from api */}, options);
 
-### Quantum2 branch:  What's needed for quantum cards currently
+### Quantum2 branch:  What\'s needed for quantum cards currently
 trixel-svg has passed the quantum card data and fonts.  After index.js makes the svg for the trixel, it calls makeQuantumCard like so:
 
 if(options.quantumCard) {
@@ -34,7 +34,7 @@ The hack-iest thing in here is the way the fonts are served up.  They are ttf fi
         style.innerHTML = "@font-face {\n" +
                           "\tfont-weight: 400;\n" +
                           "\tfont-style: normal;\n" +
-                          "\tfont-family: 'Roboto Slab';\n" +
+                          "\tfont-family: \'Roboto Slab\';\n" +
                           "\tsrc: url('http://0.0.0.0:3007/styles/fonts/RobotoSlab-Regular.ttf');\n" +
                           "}\n" +
                           "\n"+
