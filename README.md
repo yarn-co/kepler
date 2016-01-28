@@ -20,7 +20,7 @@ var options = {
 
 var SVG = Kepler({/* trixel data from api */}, options);
 
-### Quantum2 branch:  What\'s needed for quantum cards currently
+### Quantum2 branch:  What's needed for quantum cards currently
 trixel-svg has passed the quantum card data and fonts.  After index.js makes the svg for the trixel, it calls makeQuantumCard like so:
 
 if(options.quantumCard) {
@@ -34,7 +34,7 @@ The hack-iest thing in here is the way the fonts are served up.  They are ttf fi
         style.innerHTML = "@font-face {\n" +
                           "\tfont-weight: 400;\n" +
                           "\tfont-style: normal;\n" +
-                          "\tfont-family: \'Roboto Slab\';\n" +
+                          "\tfont-family: 'Roboto Slab';\n" +
                           "\tsrc: url('http://0.0.0.0:3007/styles/fonts/RobotoSlab-Regular.ttf');\n" +
                           "}\n" +
                           "\n"+
@@ -105,7 +105,7 @@ The messiest code to look at in makeQuantumCard is the code that deals with text
 TODO:
     -Apply the same logic for wrapping text in multi line card names as exists for multi line powers.
     -Nail down the bottom margin of the power for layouts 2 and 3.  It can differ by around 4 or 5 pixels with different numbers of           lines.
-It's been an honor!  I hope to work with you guys again soon.
+It's been an honor!  I hope to work with you guys again soon.  PS, I don't know how to make the red highlight go away.
     
 /*
  * SVG.file holds the SVG file as a string
