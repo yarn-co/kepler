@@ -1,5 +1,9 @@
 # Kepler
-Your premier planet-finder
+Your premier planet-finder V2
+
+## V2 has major changes. Need to outline what needs retooling
+
+
 
 ## Usage
 ```javascript
@@ -14,21 +18,26 @@ var options = {
     square: true,           // Defaults to false, displays image as a square crop instead of a tight crop
     padding: 5,              // Defaults to 0, adds padding by percentage
     stickerSheet: {
-        dpi: 600
+        dpi: 600 << this is incorrect use of dpi. dpi is a print system, 
+        while yes its also a size we need either mm units or ppi
     }
 }
 
 var SVG = Kepler({/* trixel data from api */}, options);
 
 ### Quantum2 branch:  What's needed for quantum cards currently
-trixel-svg has passed the quantum card data and fonts.  After index.js makes the svg for the trixel, it calls makeQuantumCard like so:
+trixel-svg has passed the quantum card data and fonts. 
+After index.js makes the svg for the trixel, it calls makeQuantumCard like so:
 
 if(options.quantumCard) {
-       ourBestBabyGirl = makeItAQuantumCard(ourBestBabyBoy, options.quantumCardData);
-       return ourBestBabyGirl;
+       return makeItAQuantumCard(SVG_OBJECT, options.quantumCardData);
 }
 
-The hack-iest thing in here is the way the fonts are served up.  They are ttf files with their own routes in trixel-svg, and they are applied by creating a style tag and adding in the code, as text that will be recognized by the browser upon rendering, that will fetch the served up fonts. Like so: 
+The hack-iest thing in here is the way the fonts are served up.
+
+>> ttf fonts need to be replaced for proper webbroswer fonts. ttf is desktop.
+
+They are ttf files with their own routes in trixel-svg, and they are applied by creating a style tag and adding in the code, as text that will be recognized by the browser upon rendering, that will fetch the served up fonts. Like so: 
 
  var style = document.createElement("style");
         style.innerHTML = "@font-face {\n" +
@@ -55,7 +64,7 @@ The hack-iest thing in here is the way the fonts are served up.  They are ttf fi
                           "\tfill: white;\n"+
                           "}\n";
 
-        newGirl.element._childNodes.push(style);
+        SVG_Element.element._childNodes.push(style);
 
 makeQuantumCard is just creating elements in the svg namespace, putting in the correct data, style and coordinates, and then appending to the trixel svg, like so:
 
