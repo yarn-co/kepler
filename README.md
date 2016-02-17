@@ -39,6 +39,8 @@ The hack-iest thing in here is the way the fonts are served up.
 
 They are ttf files with their own routes in trixel-svg, and they are applied by creating a style tag and adding in the code, as text that will be recognized by the browser upon rendering, that will fetch the served up fonts. Like so: 
 
+these styles are static and need to be arguments
+
  var style = document.createElement("style");
         style.innerHTML = "@font-face {\n" +
                           "\tfont-weight: 400;\n" +
